@@ -1,0 +1,28 @@
+Source: libmimedir
+Section: libs
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends: debhelper (>> 8.0.0), autotools-dev, dh-autoreconf, bison, flex, libtool, libtool-bin
+Standards-Version: 3.9.2
+Homepage: http://sourceforge.net/projects/libmimedir
+
+Package: libmimedir0
+Architecture: any
+Provides: libmimedir
+Replaces: libmimedir
+Conflicts: libmimedir
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library to parse RFC 2425 Directory Information blocks 
+ RFC 2425 defines a MIME Content-Type for Directory Information.
+ This library contains necessary methods to parse information blocks arranged
+ in such a manner.
+
+Package: libmimedir-dev
+Section: libdevel
+Architecture: any
+Depends: libmimedir0 (= ${binary:Version}), ${misc:Depends}
+Description: Developer files for libmimedir
+ RFC 2425 defines a MIME Content-Type for Directory Information.
+ .
+ This package contains the development files for libmimedir.

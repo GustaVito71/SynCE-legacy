@@ -1,0 +1,78 @@
+
+prefix= @prefix@
+exec_prefix= @exec_prefix@
+libdir= @libdir@
+includedir= @includedir@
+top_builddir= .
+
+CC=@CC@
+
+CFLAGS+= -Wall @CFLAGS@ @DEFS@
+LIBS+= @LIBS@
+
+YACC= @YACC@
+LEX= @LEX@
+INSTALL= @INSTALL@
+RANLIB= @RANLIB@
+LIBTOOL= libtool
+LIBS= -L. libmimedir.la
+
+OBJS= dirlex.o dirsynt.o parse.o get.o dup.o free.o memmem.o add.o count.o del.o
+LOBJS= dirlex.lo dirsynt.lo parse.lo get.lo dup.lo free.lo memmem.lo add.lo count.lo del.lo
+
+TESTS = test
+
+all: libmimedir.a libmimedir.la $(TESTS)
+
+libmimedir.a: ${OBJS}
+	ar rc libmimedir.a ${OBJS}
+	$(RANLIB) libmimedir.a
+
+libmimedir.la: ${LOBJS}
+	$(LIBTOOL) --mode=link ${CC} ${CFLAGS} ${LDFLAGS} -rpath ${libdir} -o libmimedir.la ${LOBJS}
+
+test: test.o libmimedir.la
+	$(LIBTOOL) --mode=link ${CC} ${CFLAGS} ${LDFLAGS} -o test test.o ${LIBS}
+
+dirsynt.c dirsynt.h: dirsynt.y
+	${YACC} -p_mdir_ -d dirsynt.y
+	@mv y.tab.c dirsynt.c
+	@mv y.tab.h dirsynt.h
+
+dirlex.c: dirlex.l dirsynt.h
+	${LEX} -Cem -odirlex.c -P_mdir_ dirlex.l
+
+.SUFFIXES:
+.SUFFIXES: .c .o .lo
+
+.c.o:
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+.c.lo:
+	$(LIBTOOL) --mode=compile ${CC} ${CFLAGS} -o $@ -c $<
+
+check: all
+	./test
+
+install: all
+	mkdir -p ${DESTDIR}${includedir}
+	mkdir -p ${DESTDIR}${libdir}
+	${INSTALL} -m 444 libmimedir.h ${DESTDIR}${includedir}
+	${INSTALL} -m 444 libmimedir.a ${DESTDIR}${libdir}
+	$(LIBTOOL) --mode=install ${INSTALL} -c -m 444 libmimedir.la ${DESTDIR}${libdir}
+
+clean:
+	rm -f $(OBJS) $(LOBJS) test.o *.a *.la *.core
+	rm -f *.tab.*
+	rm -f test
+
+distclean: clean
+	rm -f config.h
+	rm -f config.cache config.status config.log
+	rm -f Makefile
+	rm -f libtool
+	rm -fr .libs
+	rm -fr autom4te.cache
+	(echo "all: bootstrap"; echo; echo "bootstrap:"; echo "	./configure && make") > Makefile
+
+

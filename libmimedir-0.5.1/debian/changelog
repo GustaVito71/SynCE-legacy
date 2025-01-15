@@ -1,0 +1,141 @@
+libmimedir (0.5.1-4ubuntu3~ppa1~xenial2) xenial; urgency=medium
+
+  * add libtool-bin to Build-Depends
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Sun, 02 Oct 2016 20:13:32 +0100
+
+libmimedir (0.5.1-4ubuntu3~ppa1~xenial1) xenial; urgency=medium
+
+  * rebuild for xenial
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Sun, 02 Oct 2016 19:39:06 +0100
+
+libmimedir (0.5.1-4ubuntu2) trusty; urgency=medium
+
+  * Reinstate autotools-dev to update config.{sub,guess} for new arches.
+
+ -- Logan Rosen <logan@ubuntu.com>  Wed, 29 Jan 2014 17:13:07 -0500
+
+libmimedir (0.5.1-4ubuntu1) trusty; urgency=medium
+
+  * Use dh-autoreconf instead of autotools-dev to also fix FTBFS on ppc64el by
+    getting new libtool macros (still updates config.{sub,guess}).
+  * Update Makefile.in patch to use system libtool, and build-depend on libtool
+    accordingly.
+
+ -- Logan Rosen <logan@ubuntu.com>  Wed, 29 Jan 2014 16:50:48 -0500
+
+libmimedir (0.5.1-4) unstable; urgency=low
+
+  * QA upload.
+  * Fix short description to not start with an article.
+  * Bump Standards-Version to 3.9.2.
+  * Add missing ${misc:Depends}.
+  * Drop remaining la file.
+  * Remove duplicate section field for the libmimedir0 binary package.
+  * Exclude la files from dh_install.
+  * Set source format to 3.0 (quilt), drop the quilt build-dependency, and
+    remove inclusion of the quilt.make and patching targets.
+  * Bump debhelper compat to 8. Set build-depend accordingly.
+
+ -- Regis Boudin <regis@debian.org>  Tue, 23 Aug 2011 22:48:22 +0100
+
+libmimedir (0.5.1-3) unstable; urgency=low
+
+  * QA upload.
+  * Cleanup quilt usage... it was removing .pc directory before calling quilt
+    pop!
+
+ -- Raphael Hertzog <hertzog@debian.org>  Sat, 25 Jul 2009 15:19:07 +0200
+
+libmimedir (0.5.1-2) unstable; urgency=low
+
+  * QA upload.
+  * Don't install the static library. (Closes: #514921).
+
+ -- Barry deFreese <bdefreese@debian.org>  Wed, 11 Feb 2009 17:41:15 -0500
+
+libmimedir (0.5.1-1) unstable; urgency=low
+
+  * QA upload.
+    + Set maintainer to Debian QA Group <packages@qa.debian.org>.
+  * New upstream release.
+  * Add Homepage.
+  * Update watch file.
+  * Add ${misc:Depends} to Depends.
+  * Replace deprecated ${Source-Version} with ${binary:Version}.
+  * Make clean not ignore errors.
+  * Add quilt patch system.
+  * 01_makefile_in.diff - Add DESTDIR.
+  * Bump debhelper build-dep and compat to 5.
+  * Bump Standards Version to 3.8.0.
+
+ -- Barry deFreese <bdefreese@debian.org>  Tue, 03 Feb 2009 15:39:55 -0500
+
+libmimedir (0.4-4) unstable; urgency=low
+
+  * Fixed unistallable bug
+
+ -- Volker Christian <voc@debian.org>  Sat, 17 Sep 2005 20:35:29 +0200
+
+libmimedir (0.4-3) unstable; urgency=low
+
+  * Maintainer email changed to voc@debian.org
+  * Update standard to 3.6.2
+  * Update watch file
+
+ -- Volker Christian <voc@debian.org>  Sun, 11 Sep 2005 20:57:50 +0200
+
+libmimedir (0.4-2) unstable; urgency=low
+
+  * Added the libmimedir.la file again
+
+ -- Volker Christian <voc@users.sourceforge.net>  Sun,  6 Mar 2005 15:05:43 +0100
+
+libmimedir (0.4-1) unstable; urgency=low
+
+  * New upstream release
+    The new release fixes a bug in the flex code.
+
+ -- Volker Christian <voc@users.sourceforge.net>  Sat,  5 Mar 2005 17:49:19 +0100
+
+libmimedir (0.3-6) unstable; urgency=low
+
+  * Added a watch file
+  * changed prefix=$\(CURDIR\)/debian/tmp/usr to
+    DESTDIR=$\(CURDIR\)/debian/tmp
+  * Now following standard 3.6.1
+
+ -- Volker Christian <voc@users.sourceforge.net>  Thu,  2 Sep 2004 21:05:01 +0200
+
+libmimedir (0.3-5) unstable; urgency=low
+
+  * Changed development package section from devel to libdevel
+
+ -- Volker Christian <voc@users.sourceforge.net>  Mon, 10 Jun 2004 23:27:20 +0200
+
+libmimedir (0.3-4) unstable; urgency=low
+
+  * Updated libmimedir part of libs and not devel
+
+ -- Volker Christian <voc@users.sourceforge.net>  Mon, 24 Mar 2004 20:35:17 +0200
+
+libmimedir (0.3-3) unstable; urgency=low
+
+  * Make libmimedir-dev depend on libmimedir
+
+ -- Volker Christian <voc@users.sourceforge.net>  Mon, 7 Mar 2004 12:00:28 +0200
+
+libmimedir (0.3-2) unstable; urgency=low
+
+  * Build shared libraries also.
+  * New Maintainer (voc)
+
+ -- Volker Christian <voc@users.sourceforge.net>  Mon, 16 Feb 2004 21:10:20 +0200
+
+libmimedir (0.3-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Thomas Butter <thomas@i.rule-the.net>  Sat,  9 Aug 2003 08:32:34 +0200
+

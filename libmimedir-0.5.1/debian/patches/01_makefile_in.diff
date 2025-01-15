@@ -1,0 +1,27 @@
+Add DESDIR support to Makefile.in
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -14,7 +14,7 @@
+ LEX= @LEX@
+ INSTALL= @INSTALL@
+ RANLIB= @RANLIB@
+-LIBTOOL= @LIBTOOL@
++LIBTOOL= libtool
+ LIBS= -L. libmimedir.la
+ 
+ OBJS= dirlex.o dirsynt.o parse.o get.o dup.o free.o memmem.o add.o count.o del.o
+@@ -55,9 +55,11 @@
+ 	./test
+ 
+ install: all
+-	${INSTALL} -m 444 libmimedir.h ${includedir}
+-	${INSTALL} -m 444 libmimedir.a ${libdir}
+-	$(LIBTOOL) --mode=install ${INSTALL} -c -m 444 libmimedir.la ${libdir}/libmimedir.la
++	mkdir -p ${DESTDIR}${includedir}
++	mkdir -p ${DESTDIR}${libdir}
++	${INSTALL} -m 444 libmimedir.h ${DESTDIR}${includedir}
++	${INSTALL} -m 444 libmimedir.a ${DESTDIR}${libdir}
++	$(LIBTOOL) --mode=install ${INSTALL} -c -m 444 libmimedir.la ${DESTDIR}${libdir}
+ 
+ clean:
+ 	rm -f $(OBJS) $(LOBJS) test.o *.a *.la *.core

@@ -1,0 +1,32 @@
+
+	libmimedir
+
+0.5.1:	2008-June-3
+
+	* Adam Williamson's -rpath fix for 64bit ABI on Mandriva.
+
+0.5:	2005-Oct-13
+
+	* Generating shared library using libtool.
+	  Based on a patch by Thomas Klausner <tk@giga.or.at>.
+
+0.4:	2005-Mar-03
+
+	* Returning to initial state after parsing the incomplete data.
+
+0.3:	2003-Jul-31
+
+	* Slightly more correct unfolding.
+	* Empty values are permitted.
+
+0.2:	2003-Apr-27
+
+	* Parser declared pure for bison too (different syntax).
+	* Ignoring the leading blank space before the parameter name.
+	Don't know how does it help, though. I suspect it's against RFC.
+
+	(Both suggested by David Eriksson <twogood@users.sourceforge.net>)
+
+0.1:	2001-Apr-23
+
+	* Initial revision.
