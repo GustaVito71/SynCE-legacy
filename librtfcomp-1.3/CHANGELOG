@@ -1,0 +1,52 @@
+2013-07-25  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 1.3 release
+
+2012-05-29  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 1.2 release
+
+
+
+librtfcomp changelog
+====================
+
+
+1/3/2007 Dr J A Gow
+-------------------
+
+Version 1.0 released. Discard and destroy any versions you have that are older
+than this, as they have an incomplete and incompatible API, and they do not
+have the Python bindings. Furthermore, versions lower than 1.0 are bug-ridden
+and just don't work.
+
+V1.0 contains: First API release. Can decompress/recompress compressed RTF, 
+and can convert from UTF8 to RTF for use in things like AirSync protocols.
+
+4/3/2007 Dr J A Gow
+-------------------
+
+Applied patch by Robert Jarzmik to fix:
+
+ - memory overflow when notes are bigger than 512 bytes
+ - UTF8 to RTF conversion mishandling
+
+14/3/2007 Dr J A Gow
+--------------------
+
+Applied patch by Robert Jarzmik to:
+
+ - significantly improve RTF handling for Unicode characters
+ - isolation of control words for futur support (color, font, bullets)
+ - identification of group level (braces)
+ - handling for unicode characters in RTF flow 
+   (euro symbol, accents, exotic caracters => rtf control \uNc)
+
+
+2008-03-26  Mark Ellis  <mark@mpellis.org.uk>
+
+* correct build without python bindings (bug 1708885)
+
+2008-08-12   Tejas Guruswamy	<masterpatricko@gmail.com>
+
+* No longer install test binaries to /usr/bin

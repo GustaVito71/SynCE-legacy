@@ -1,0 +1,73 @@
+#!/usr/bin/make -f
+
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+configure_flags += --prefix=/usr --build=$(DEB_BUILD_GNU_TYPE)
+
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	configure_flags += --host=$(DEB_HOST_GNU_TYPE)
+endif
+
+CFLAGS += -I../../include/ -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
+
+PYVERS := $(shell pyversions -vr debian/control 2>/dev/null)
+
+build-%/configure-stamp: configure
+	dh_testdir
+	mkdir -p build-$*
+	cd build-$* && \
+		PYTHON=`which python$*` CFLAGS="$(CFLAGS)" \
+			$(CURDIR)/configure $(configure_flags)
+	touch $@
+
+build-%/build-stamp: build-%/configure-stamp
+	dh_testdir
+	$(MAKE) -C build-$*
+	touch $@
+
+build: $(PYVERS:%=build-%/build-stamp)
+
+install-clean:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+
+install-%: build-%/build-stamp
+	dh_testdir
+	dh_testroot
+	$(MAKE) -C build-$* install DESTDIR=$(CURDIR)/debian/tmp
+	dh_install
+
+install: $(PYVERS:%=install-%)
+	rm $(CURDIR)/debian/python-rtfcomp/usr/lib/python*/*-packages/*.la \
+	  $(CURDIR)/debian/python-rtfcomp/usr/lib/python*/*-packages/*.a
+
+clean::
+	dh_testdir
+	rm -Rf build-*
+	dh_clean
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs -a
+	dh_installexamples -a
+	dh_installinfo -a
+	dh_installchangelogs CHANGELOG -a
+	dh_strip --dbg-package=librtfcomp-dbg -a
+	dh_link -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_python2 -ppython-rtfcomp
+	dh_makeshlibs -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install
