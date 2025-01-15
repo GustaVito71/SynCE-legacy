@@ -1,0 +1,110 @@
+#!/usr/bin/make -f
+
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+configure_flags += --prefix=/usr \
+	--build=$(DEB_BUILD_GNU_TYPE) \
+	--disable-rpath \
+	--libexecdir=/usr/lib/synce-core \
+	--sysconfdir=/etc \
+	--localstatedir=/var \
+	--enable-bluetooth-support \
+	--enable-generate-docs
+
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	configure_flags += --host=$(DEB_HOST_GNU_TYPE)
+endif
+
+CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
+
+PYVERS := $(shell pyversions -vr debian/control 2>/dev/null)
+
+build-%/configure-stamp: configure
+	dh_testdir
+	mkdir -p build-$*
+	cd build-$* && \
+		PYTHON=`which python$*` CFLAGS="$(CFLAGS)" PATH="$(PATH):/sbin" \
+			$(CURDIR)/configure $(configure_flags)
+	touch $@
+
+build-%/build-stamp: build-%/configure-stamp
+	dh_testdir
+	$(MAKE) -C build-$*
+	$(MAKE) -C build-$* html
+	touch $@
+
+build: build-arch build-indep
+
+build-arch: $(PYVERS:%=build-%/build-stamp)
+
+build-indep: $(PYVERS:%=build-%/build-stamp)
+
+install-clean:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+
+install-%: build-%/build-stamp
+	dh_testdir
+	dh_testroot
+	$(MAKE) -C build-$* install DESTDIR=$(CURDIR)/debian/tmp
+	$(MAKE) -C build-$* install-html DESTDIR=$(CURDIR)/debian/tmp
+
+install: $(PYVERS:%=install-%)
+	dh_install
+	rm $(CURDIR)/debian/python-rapi2/usr/lib/python*/*-packages/*.la \
+	  $(CURDIR)/debian/python-rapi2/usr/lib/python*/*-packages/*.a
+
+	for file in `ls $(CURDIR)/debian/synce-tools/usr/bin/p*`; do \
+	    mv $$file \
+	      $(CURDIR)/debian/synce-tools/usr/bin/synce-`basename $$file`; \
+	done
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp 
+	[ ! -f Makefile ] || $(MAKE) distclean	
+	rm -Rf build-*
+	dh_clean
+
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+	dh_installdocs -i
+	dh_installchangelogs -i ChangeLog
+	dh_compress -i
+	dh_fixperms -i
+	dh_installdeb -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+binary-arch: build install
+	dh_testdir -a
+	dh_testroot -a
+	dh_installdocs -a
+	dh_installexamples -a
+	dh_installman -a
+	for file in `ls $(CURDIR)/debian/synce-tools/usr/share/man/man1/p*`; do \
+	    mv $$file \
+	      $(CURDIR)/debian/synce-tools/usr/share/man/man1/synce-`basename $$file`; \
+	done
+
+	dh_installinit bluetooth/synce-bluetooth
+	dh_installchangelogs -a ChangeLog
+	dh_strip -a --dbg-package=libsynce-dbg
+	dh_link -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_python2 -ppython-rapi2
+	dh_makeshlibs -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+.PHONY: build build-arch build-indep clean binary-indep binary-arch binary install 

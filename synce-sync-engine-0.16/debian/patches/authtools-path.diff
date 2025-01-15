@@ -1,0 +1,12 @@
+diff -Nurp synce-sync-engine-0.15.2~20120830.orig/SyncEngine/auth.py synce-sync-engine-0.15.2~20120830/SyncEngine/auth.py
+--- synce-sync-engine-0.15.2~20120830.orig/SyncEngine/auth.py	2012-08-30 12:22:40.000000000 +0100
++++ synce-sync-engine-0.15.2~20120830/SyncEngine/auth.py	2012-08-30 13:02:42.594362806 +0100
+@@ -27,7 +27,7 @@ UDEV_DEVICE_PASSWORD_FLAG_CHECKING
+ UDEV_DEVICE_PASSWORD_FLAG_UNLOCKED          = "unlocked"
+ 
+ 	
+-AUTH_TOOLS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),"../tools")
++AUTH_TOOLS_PATH = os.path.dirname(os.path.abspath(__file__))
+ CLI_TOOL = os.path.join(AUTH_TOOLS_PATH,"authcli.py")
+ GUI_TOOL = os.path.join(AUTH_TOOLS_PATH,"authgui.py")
+ 	

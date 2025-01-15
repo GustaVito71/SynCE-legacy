@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+# bit of a hack to allow our custom dhclient.conf to be used with apparmor
+
+APPARMOR_FILE=/etc/apparmor.d/local/sbin.dhclient
+
+if ! grep synce-core "$APPARMOR_FILE" > /dev/null 2>&1; then
+    echo "# synce-core" >> "$APPARMOR_FILE"
+    echo "/usr/share/synce-core/dhclient.conf r," >> "$APPARMOR_FILE"
+fi
+
+exit 0

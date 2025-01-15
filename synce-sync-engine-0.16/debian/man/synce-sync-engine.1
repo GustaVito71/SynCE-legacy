@@ -1,0 +1,33 @@
+.TH "synce-sync-engine" 1 "SynCE" "http://www.synce.org/"
+.SH NAME
+synce-sync-engine \- SyncEngine for SynCE
+.SH SYNOPSIS
+.B synce-sync-engine
+.RI [ options ]
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\^\-help
+Display usage info.
+.TP
+.BI \-\^\-config= CONFDIR
+Use
+.I CONFDIR
+as the sync-engine config location.
+.TP
+.BR \-o ", " \-\^\-once
+Run for one connection only.
+.TP
+.BI \-\^\-verbosity= ARG
+Set the log level to one of: INFO, DBBUG, ERROR
+.TP
+.BI \-\^\-logfile= FILE
+Set the log file to
+.I FILE.
+If not specified, will log to stdout.
+.TP
+.BR \-d ", " \-\^\-detached
+Daemonize the sync-engine
+.SH "AUTHOR"
+This man page was written by Jonny Lamb <jonnylamb@jonnylamb.com>.
+.SH "SEE ALSO"
+synce(1)

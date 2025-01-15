@@ -1,0 +1,10 @@
+$Id: TODO 1973 2005-02-16 14:34:44Z twogood $
+
+TODO for the RRA module
+=======================
+
+- Handle ATTENDEE properties in VEVENT
+
+- Use MAPI constants instead in *_ids.h:
+  http://cvs.winehq.org/cvsweb/wine/include/mapitags.h?rev=HEAD&content-type=text/x-cvsweb-markup
+

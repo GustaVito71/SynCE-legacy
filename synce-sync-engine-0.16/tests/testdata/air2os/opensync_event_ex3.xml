@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<vcal>
+  <Event>
+    <Transparency>
+      <Content>OPAQUE</Content>
+    </Transparency>
+    <Categories>
+      <Category>Holiday</Category>
+      <Category>Friends</Category>
+    </Categories>
+    <Description>
+      <Content>
+Sshh!
+</Content>
+    </Description>
+    <LastModified>
+      <Content>20070120T190950Z</Content>
+    </LastModified>
+    <DateEnd>
+      <Content>20070121T143000Z</Content>
+    </DateEnd>
+    <Location>
+      <Content>Secret location</Content>
+    </Location>
+    <Alarm>
+      <AlarmTrigger>
+        <Content>-PT4H</Content>
+        <Value>DURATION</Value>
+        <Related>START</Related>
+      </AlarmTrigger>
+      <AlarmAction>DISPLAY</AlarmAction>
+      <AlarmDescription>Recurring appointment</AlarmDescription>
+    </Alarm>
+    <Class>
+      <Content>PUBLIC</Content>
+    </Class>
+    <Summary>
+      <Content>Recurring appointment</Content>
+    </Summary>
+    <DateStarted>
+      <Content>20070121T140000Z</Content>
+    </DateStarted>
+    <Attendee>
+      <Content>MAILTO:jondoe@rpi.edu</Content>
+      <CommonName>Jon Doe</CommonName>
+    </Attendee>
+    <RecurrenceRule>
+      <Rule>INTERVAL=2</Rule>
+      <Rule>UNTIL=20080808T050000Z</Rule>
+      <Rule>FREQ=MONTHLY</Rule>
+      <Rule>BYDAY=-1SU</Rule>
+    </RecurrenceRule>
+  </Event>
+</vcal>

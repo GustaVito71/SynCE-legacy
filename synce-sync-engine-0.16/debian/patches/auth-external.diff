@@ -1,0 +1,24 @@
+diff -Nur synce-sync-engine-0.13.orig/config/syncengine.conf.xml synce-sync-engine-0.13/config/syncengine.conf.xml
+--- synce-sync-engine-0.13.orig/config/syncengine.conf.xml	2009-01-10 15:38:38.000000000 +0000
++++ synce-sync-engine-0.13/config/syncengine.conf.xml	2009-01-10 16:53:34.000000000 +0000
+@@ -30,7 +30,7 @@
+ 			without GTK
+ 			       
+ 			If this element is not specified, the default will be
+-			INTERNAL_GTK
++			EXTERNAL
+ 		-->
+ 		
+ 		<!-- <AuthMethod>INTERNAL_GUI</AuthMethod> -->
+diff -Nur synce-sync-engine-0.13.orig/SyncEngine/config.py synce-sync-engine-0.13/SyncEngine/config.py
+--- synce-sync-engine-0.13.orig/SyncEngine/config.py	2009-01-10 15:38:38.000000000 +0000
++++ synce-sync-engine-0.13/SyncEngine/config.py	2009-01-10 16:52:15.000000000 +0000
+@@ -213,7 +213,7 @@
+ 				  "EnableDTPT" : self.validate_EnableDTPT }
+ 				  
+ 		self.cfg = { "SlowSyncDisable" : 0,
+-		             "AuthMethod"      : "INTERNAL_GUI",
++		             "AuthMethod"      : "EXTERNAL",
+ 			     "AppendDefaultTimezone" : 0,
+ 			     "OpensyncXMLFormat" : DefaultFormat,
+ 			     "FlushIDB" : 1,

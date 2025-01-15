@@ -1,0 +1,80 @@
+Source: librra
+Section: libs
+Priority: optional
+Maintainer: Jonny Lamb <jonny@debian.org>
+Build-Depends: debhelper (>= 5), libglib2.0-dev, libmimedir-dev, libsynce0-dev (>= 0.17), pkg-config, python (>= 2.3), python-all-dev (>= 2.6.6-3), python-pyrex (>= 0.9.7), autotools-dev
+Standards-Version: 3.8.4
+Homepage: http://www.synce.org/
+Vcs-Git: git://git.jonnylamb.com/git/packaging/librra.git
+Vcs-Browser: http://git.jonnylamb.com/?p=packaging/librra.git;a=summary
+
+Package: librra-dev
+Section: libdevel
+Architecture: any
+Provides: librra0-dev
+Conflicts: librra0-dev (<< 0.11-2)
+Replaces: librra0-dev (<< 0.11-2)
+Depends: ${misc:Depends}, librra0 (= ${binary:Version}), libsynce0-dev (>> 0.16)
+Description: Library for synchronisation with Windows Mobile devices: dev files
+ rra provides the necessary low level magic to synchronise intelligently
+ with Windows Mobile devices, allowing you to tell what's been
+ created/changed/deleted since the last time the device was contacted.
+ It can convert the internal Windows Mobile formats to standards such
+ as vCard, vEvent or vTodo.
+ .
+ This package contains the files needed to write applications that use librra.
+
+Package: librra-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends}, librra0 (= ${binary:Version})
+Description: Library for synchronisation with Windows Mobile devices: debug symbols
+ rra provides the necessary low level magic to synchronise intelligently
+ with Windows Mobile devices, allowing you to tell what's been
+ created/changed/deleted since the last time the device was contacted.
+ It can convert the internal Windows Mobile formats to standards such
+ as vCard, vEvent or vTodo.
+ .
+ This package contains debugging symbols for the library.
+
+Package: librra0
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Library for synchronisation with Windows Mobile devices
+ rra provides the necessary low level magic to synchronise intelligently
+ with Windows Mobile devices, allowing you to tell what's been
+ created/changed/deleted since the last time the device was contacted.
+ It can convert the internal Windows Mobile formats to standards such
+ as vCard, vEvent or vTodo.
+ .
+ This package contains the librra shared library.
+
+Package: librra-tools
+Architecture: any
+Provides: librra0-tools
+Conflicts: librra0-tools (<< 0.11-2)
+Replaces: librra0-tools (<< 0.11-2)
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Library for synchronisation with Windows Mobile devices (tools)
+ rra provides the necessary low level magic to synchronise intelligently
+ with Windows Mobile devices, allowing you to tell what's been
+ created/changed/deleted since the last time the device was contacted.
+ It can convert the internal Windows Mobile formats to standards such
+ as vCard, vEvent or vTodo.
+ .
+ This package contains the rra tools.
+
+Package: python-rra
+Section: python
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Provides: ${python:Provides}
+Description: Library for syncing with Windows Mobile devices (Python bindings)
+ rra provides the necessary low level magic to synchronise intelligently
+ with Windows Mobile devices, allowing you to tell what's been
+ created/changed/deleted since the last time the device was contacted.
+ It can convert the internal Windows Mobile formats to standards such
+ as vCard, vEvent or vTodo.
+ .
+ This package contains the librra Python bindings.

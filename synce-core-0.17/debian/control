@@ -1,0 +1,114 @@
+Source: synce-core
+Section: libs
+Priority: optional
+Maintainer: Mark Ellis <mark@mpellis.org.uk>
+Build-Depends: debhelper (>= 5), libdbus-1-dev, pkg-config (>= 0.21), libglib2.0-dev (>= 2.26.0), python (>> 2.6.6), python-all-dev (>> 2.6.6), python-pyrex (>= 0.9.6), quilt, ppp, net-tools, isc-dhcp-client, libgudev-1.0-dev, udev, doxygen
+Standards-Version: 3.9.3.0
+Homepage: http://www.synce.org/
+
+Package: libsynce0-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsynce0 (= ${binary:Version}), libglib2.0-dev
+Conflicts: librapi2
+Description: Common library for SynCE, a tool to sync Windows Mobile devices
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ libsynce provides common support functions and an implementation of RAPI,
+ equivalent to rapi.dll on a Windows machine, to make remote calls to your
+ Window Mobile device.
+ .
+ This package contains the development files for the library.
+
+Package: synce-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: Documentation for SynCE, a tool to sync Windows Mobile devices
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ This package contains the documentation for the core library.
+
+Package: libsynce-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsynce0 (= ${binary:Version})
+Conflicts: librapi2
+Description: Common library for SynCE, a tool to sync Windows Mobile devices
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ libsynce provides common support functions and an implementation of RAPI,
+ equivalent to rapi.dll on a Windows machine, to make remote calls to your
+ Window Mobile device.
+ .
+ This package contains debugging symbols for the library.
+
+Package: libsynce0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: librapi2
+Description: Helper library for SynCE, a tool to sync Windows Mobile devices
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ libsynce provides common support functions and an implementation of RAPI,
+ equivalent to rapi.dll on a Windows machine, to make remote calls to your
+ Window Mobile device.
+ .
+ This package contains the runtime library.
+
+Package: synce-tools
+Section: utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsynce0 (= ${binary:Version}), synce-dccm (= ${binary:Version}), python
+Conflicts: librapi2-tools
+Description: Make RAPI calls to a Window Mobile device, library tools
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ This package contains tools that use libsynce to talk to a Windows Mobile
+ device to perform various functions. Many of these are simply remote
+ versions of standard unix file utilities.
+
+Package: python-rapi2
+Section: python
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, libsynce0 (= ${binary:Version})
+Provides: ${python:Provides}
+Description: Make RAPI calls to a Windows Mobile device, Python bindings
+ The purpose of the SynCE project is to provide a means of communication with
+ a Windows Mobile, or Windows CE, device from a computer running Linux,
+ FreeBSD or a similar operating system.
+ .
+ This package contains the Python bindings for the RAPI calls in the library.
+
+Package: synce-dccm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsynce0 (= ${binary:Version}), ppp, net-tools, isc-dhcp-client, python
+Conflicts: synce-serial, synce-hal, synce-connector
+Replaces: synce-hal, odccm, synce-connector
+Breaks: synce-connector
+Description: Daemon to maintain a connection to Windows Mobile devices
+ synce-dccm is a udev callout infrastructure and dccm implementation for
+ Windows Mobile devices. It responds to keep alives and provides other
+ members of the SynCE suite of tools with access to the device.
+
+Package: synce-bluetooth
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, synce-dccm (= ${binary:Version}), bluez-compat, python
+Conflicts: synce-connector-bluetooth
+Replaces: synce-connector-bluetooth
+Breaks: synce-connector-bluetooth
+Description: Bluetooth connection infrastructure for synce-dccm
+ An extension for synce-dccm to allow Windows Mobile devices to connect
+ via a bluetooth serial connection.

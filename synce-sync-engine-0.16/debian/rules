@@ -1,0 +1,64 @@
+#!/usr/bin/make -f
+
+PYVER=$(shell python -c 'import sys; print sys.version[:3]')
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	rm -rf dist build build-area
+	-find . -name *\.py[co] -exec rm {} \;
+	-rm -rf SyncEngine.egg-info
+	dh_clean
+
+build: build-stamp
+
+build-stamp:
+	dh_testdir
+	python setup.py build
+	touch $@
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	python setup.py install \
+		--root=$(CURDIR)/debian/tmp \
+		--single-version-externally-managed \
+		--install-layout=deb
+	rm $(CURDIR)/debian/tmp/usr/bin/synce-install-plugins.py
+	rm -rf $(CURDIR)/debian/tmp/usr/lib/python$(PYVER)/*-packages/plugins
+	find
+	for file in $(CURDIR)/debian/tmp/usr/bin/*; do \
+		mv $$file \
+		$(CURDIR)/debian/tmp/usr/bin/synce-`basename $$file | sed -e 's/.py$$//' -e 's/_/-/'`; \
+	done
+	if test "$(PYVER)" > "2.5"; then \
+		cp $(CURDIR)/tools/authcli.py $(CURDIR)/debian/tmp/usr/lib/python$(PYVER)/dist-packages/SyncEngine/; \
+		cp $(CURDIR)/tools/authgui.py $(CURDIR)/debian/tmp/usr/lib/python$(PYVER)/dist-packages/SyncEngine/; \
+	else \
+		cp $(CURDIR)/tools/authcli.py $(CURDIR)/debian/tmp/usr/lib/python$(PYVER)/site-packages/SyncEngine/; \
+		cp $(CURDIR)/tools/authgui.py $(CURDIR)/debian/tmp/usr/lib/python$(PYVER)/site-packages/SyncEngine/; \
+	fi
+	dh_install
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs CHANGELOG
+	dh_installdocs
+	dh_installman 
+	dh_python2
+	dh_compress -X.py
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary-arch: build install
+
+binary: binary-indep binary-arch
+
+.PHONY: build clean binary-indep binary-arch binary install configure

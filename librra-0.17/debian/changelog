@@ -1,0 +1,218 @@
+librra (0.17-0ubuntu0~ppa1~xenial1) xenial; urgency=medium
+
+  * rebuild for xenial
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Sun, 02 Oct 2016 19:33:33 +0100
+
+librra (0.17-0ubuntu0~ppa1~trusty1) trusty; urgency=low
+
+  * new upstream release
+  * debian/{rules,control} - move to dh_python2
+  * debian/control - depend on libsynce >= 0.17
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Thu, 25 Jul 2013 16:58:40 +0100
+
+librra (0.16-0ubuntu0~ppa1~precise1) precise; urgency=low
+
+  * new upstream release
+  * debian/control - remove dependency on librapi2, use synce-core; depend on
+    libsynce >= 0.16
+  * don't install libtool .la files
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Wed, 30 May 2012 15:50:02 +0100
+
+librra (0.14-1.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * debian/rules:
+    - Update config.{sub,guess} before configure and remove it on clean.
+      This way we don't bloat the debian diff.
+  * debian/control:
+    - Drop Build-Depends on libhal-dev. librra does not actually need libhal
+      and only picked up an unnecessary dependency via the libtool .la files
+      from libsynce and librapi. Those have been fixed now. (Closes: #613177)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 05 Jun 2011 15:02:24 +0200
+
+librra (0.14-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove references to other libraries from dependency_libs field
+    (Closes: #620624).
+
+ -- Luk Claes <luk@debian.org>  Tue, 31 May 2011 08:14:24 +0200
+
+librra (0.14-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Updated build-deps.
+    + Upped Standards-Version. (no changes)
+    + Added ${misc:Depends} where appropriate.
+    + Removed trailing whitespace.
+  * Changed source format to 3.0 (quilt).
+  * debian/python-rra.install: Don't hardcode site-packages.
+  * debian/patches/:
+    + 0001-Use-new-style-pyrex-loops.patch: Removed as now upstream.
+
+ -- Jonny Lamb <jonny@debian.org>  Wed, 12 May 2010 12:45:11 +0100
+
+librra (0.13-2) unstable; urgency=low
+
+  * debian/gbp.conf: Removed no-create-orig line.
+  * debian/rules: Update to support python 2.6. (Closes: #525512)
+  * debian/control:
+    + Changed librra-dbg Section to debug.
+    + Added autotools-dev Build-Dep.
+
+ -- Jonny Lamb <jonny@debian.org>  Mon, 04 May 2009 16:35:34 +0100
+
+librra (0.13-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/gbp.conf: Added git-buildpackage config file.
+  * debian/control:
+    + Use my debian.org email address.
+    + Bumped deps on libsynce0-dev and librapi2-dev.
+    + Bumped python build-dep to 2.3.
+    + Added >= 0.9.7 to python-pyrex Build-Dep. (Closes: #514235)
+    + Added libhal-dev build-dep.
+    + Removed unnecessary Section fields.
+  * debian/update-patches.mk: Added.
+  * debian/rules: Include update-patches.mk.
+  * debian/copyright:
+    + Changed license of Debian packaging from "GPL" to GPLv2.
+    + Use my debian.org email address.
+    + Fix dh_make boilerplate copyright notice for Debian packaging.
+
+ -- Jonny Lamb <jonny@debian.org>  Tue, 17 Feb 2009 22:24:53 +0000
+
+librra (0.11.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control:
+    + Removed voc from Uploaders -- he's MIA.
+    + Updated Build-Dep versions for libsynce and librapi2.
+  * debian/patches/rra-man-pages-name-fix.diff: Removed. This is fixed
+    upstream.
+  * debian/patches/python-pyrex-type.diff: Added to fix a FTBFS with
+    pyrra.pyx. (Closes: #482258)
+
+ -- Jonny Lamb <jonnylamb@jonnylamb.com>  Fri, 23 May 2008 20:28:58 +0100
+
+librra (0.11-2) unstable; urgency=low
+
+  * debian/control:
+    + Added Homepage field.
+    + Upped dependencies on lib{rapi2,synce}.
+    + Removed build-dependency on dpatch.
+    + Added Vcs-{Git,Browser} fields.
+    + Removed cdbs Build-Dep.
+    + Renamed librra0-{dev,tools} to librra-{dev,tools}.
+    + Added Provides/Replaces/Conflicts for librra-{dev,tools}.
+    + s/python/Python/g to please lintian.
+    + Cleaned up and alphabetized Build-Deps.
+  * Bumped Standards-Version to 3.7.3.
+  * debian/watch: Updated URL.
+  * Added debug package, librra-dbg.
+  * debian/rules: Moved from CDBS to debhelper. This fixes the Python policy
+    problems that were present.
+  * debian/copyright: Cleaned up.
+  * debian/*.install: Cleaned up and updated.
+  * Added quilt support.
+  * debian/patches: Added manpage fix so rra-*.1 manpages can be parsed by
+    mandb correctly. This pleases lintian.
+
+ -- Jonny Lamb <jonnylamb@jonnylamb.com>  Wed, 13 Feb 2008 11:01:12 +0000
+
+librra (0.11-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Christopher L Cheney <ccheney@debian.org>  Sat, 09 Feb 2008 19:59:26 -0600
+
+librra (0.10.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * New python bindings give birth to python-rra package!
+  * Moved debian/rules to use cdbs.
+  * New Maintainer Jonny Lamb.
+  * Updated website in copyright.
+  * Updated description in copyright.
+
+ -- Jonny Lamb <jonnylamb@jonnylamb.com>  Thu, 03 May 2007 21:28:54 +0100
+
+librra (0.9.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Changed Maintainer-Email to voc@debian.org
+  * Updated watch file to conform to version 3
+  * Updated the the Policy standard 3.6.2
+  * FTBFS: Missing braces around an ambiguous else (Closes: #322641)
+  * librra0: deadlock on unexpected escape (Closes: #300242)
+  * librra0-tools: rra-* tools in src/ directory should be installed
+    (Closes: #317766)
+  * Removed the -Werror from the CFLAGS
+
+ -- Volker Christian <voc@debian.org>  Thu,  8 Sep 2005 20:53:04 +0200
+
+librra (0.9.0-2) unstable; urgency=low
+
+  * Closes: #279950: synce-matchmaker.1.gz clone of synce-partnership.1.gz
+  * Suggests: to synce-kde and synce-multisync-plugin added 
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 4 Dec 2004 00:47:27 +0100
+
+librra (0.9.0-1) unstable; urgency=low
+
+  * New Upstream release
+  * Added a watch file
+  * Added --verion-info to dh_makeshlib
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Fri, 29 Aug 2004 13:37:32 +0100
+
+librra (0.8.9-5) unstable; urgency=low
+
+  * Moved development files into libdevel
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 21 Jun 2004 09:16:07 +0100
+
+librra (0.8.9-4) unstable; urgency=low
+
+  * Moved librra-tools from section libs into section utils
+  * Update ltmain.sh to support also arm
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 24 Mar 2004 20:16:07 +0100
+
+librra (0.8.9-3) unstable; urgency=low
+
+  * Included the missed directory and its content /usr/include/rra
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 03 Mar 2004 19:14:00 +0100
+
+librra (0.8.9-2) unstable; urgency=low
+
+  * 64bit bug fixed
+  * debian/files deleted
+  
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 29 Feb 2004 12:44:37 +0100
+
+librra (0.8.9-1) unstable; urgency=low
+
+  * New upstream release
+  * New Maintainer Volker Christian
+
+ -- Volker Christian <voc@users.sourceforge.net>  Sat, 14 Feb 2004 20:44:37 +0100
+
+librra (0.8.4+cvs-1) unstable; urgency=low
+
+  * CVS build.
+ 
+ -- Jonathan McDowell <noodles@earth.li>  Thu, 25 Sep 2003 19:54:37 +0100
+ 
+librra (0.8.2-1) unstable; urgency=low
+
+  * Initial Debian upload.
+
+ -- Thomas Butter <thomas@i.rule-the.net>  Mon, 25 Aug 2003 13:37:03 +0200
+

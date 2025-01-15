@@ -1,0 +1,53 @@
+synce-core (0.17-0ubuntu0~ppa1~xenial2) xenial; urgency=medium
+
+  * debian/control - change dependency on dhcp3-client to isc-dhcp-client in binary packages also
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Sun, 28 Aug 2016 15:06:43 +0100
+
+synce-core (0.17-0ubuntu0~ppa1~xenial1) xenial; urgency=medium
+
+  * debian/control - change dependency on dhcp3-client to isc-dhcp-client
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Sun, 28 Aug 2016 07:56:53 +0100
+
+synce-core (0.17-0ubuntu0~ppa1~trusty2) trusty; urgency=low
+
+  * add patch py-findallfiles-segfault.diff
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Fri, 24 Jan 2014 11:27:38 +0000
+
+synce-core (0.17-0ubuntu0~ppa1~saucy1) saucy; urgency=low
+
+  * New upstream release
+  * Switch to dpkg-source 3.0 (quilt) format
+  * add documentation package synce-doc
+  * remove build-dep on dbus-glib, depend on glib >= 2.26 and libdbus-1-dev,
+    building with GDBus instead of dbus-glib
+  * remove dh_pycentral in favour of dh_python2
+  * add python dependency to synce-tools and synce-bluetooth
+  * breaks synce-connector-*
+  * bump standards-version to 3.9.3.0
+  * correct bluetooth init script
+  * add debhelper token to maintainer scripts, and check for errors
+  * add build-arch and build-indep targets, add rules to binary-indep
+    target for documentation
+  * fix dccm package mainainer scripts
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Thu, 25 Jul 2013 16:37:26 +0100
+
+synce-core (0.16-0ubuntu0~ppa1~precise1) precise; urgency=low
+
+  * Initial full release
+  * remove dep on libgnet, now use gio
+  * rename synce-connector to synce-dccm, synce-connector-bluetooth
+    to synce-bluetooth
+  * don't install libtool .la files
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Wed, 30 May 2012 15:38:46 +0100
+
+synce-core (0.16~20110725-0ubuntu0~ppa1~oneiric1) oneiric; urgency=low
+
+  * Initial packaging.
+
+ -- Mark Ellis <mark@mpellis.org.uk>  Mon, 25 Jul 2011 20:27:20 +0100
+

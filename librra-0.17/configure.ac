@@ -1,0 +1,176 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_PREREQ(2.53)
+
+AC_INIT(librra, 0.17)
+AC_CONFIG_HEADERS(rra_config.h)
+AC_CONFIG_SRCDIR(lib/syncmgr.h)
+
+dnl AC_CANONICAL_HOST
+dnl AC_CANONICAL_TARGET
+
+AM_INIT_AUTOMAKE
+
+dnl Checks for programs.
+AC_PROG_AWK
+AC_PROG_CXX
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_LIBTOOL
+AC_PROG_MAKE_SET
+
+dnl Check for libsynce
+PKG_CHECK_MODULES(LIBSYNCE, libsynce >= 0.17)
+
+  AC_ARG_WITH(libmimedir,
+    AC_HELP_STRING(
+      [--with-libmimedir[=DIR]],
+      [Search for libmimedir in DIR/include and DIR/lib]),
+      [
+				CPPFLAGS="$CPPFLAGS -I${withval}/include"
+				LDFLAGS="$LDFLAGS -L${withval}/lib"
+			]
+    )
+
+  AC_ARG_WITH(libmimedir-include,
+    AC_HELP_STRING(
+      [--with-libmimedir-include[=DIR]],
+      [Search for libmimedir header files in DIR]),
+      [
+				CPPFLAGS="$CPPFLAGS -I${withval}"
+			]
+    )
+
+  AC_ARG_WITH(libmimedir-lib,
+    AC_HELP_STRING(
+      [--with-libmimedir-lib[=DIR]],
+      [Search for libmimedir library files in DIR]),
+      [
+				LDFLAGS="$LDFLAGS -L${withval}"
+			]
+    )
+
+
+	AC_CHECK_LIB(mimedir,mdir_parse,,[
+		AC_MSG_ERROR([Can't find libmimedir (http://sourceforge.net/projects/libmimedir/)])
+		])
+	AC_CHECK_HEADERS(libmimedir.h,,[
+		AC_MSG_ERROR([Can't find libmimedir.h (http://sourceforge.net/projects/libmimedir/)])
+		])
+
+  enable_recurrence=1
+  AC_ARG_ENABLE(recurrence,
+    AC_HELP_STRING(
+      [--enable-recurrence],
+      [Enables experimential recurrence support]),
+      [enable_recurrence=1],
+      [enable_recurrence=0]
+    )
+  AC_DEFINE_UNQUOTED(ENABLE_RECURRENCE, $enable_recurrence, [Set to 1 when recurrrence is enabled])
+
+
+dnl Checks for header files.
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+saved_CFLAGS="$CFLAGS"
+CFLAGS=""
+AC_C_CONST
+CFLAGS="$saved_CFLAGS"
+
+AC_REPLACE_FUNCS(strndup)
+AC_REPLACE_FUNCS(strcasestr)
+
+# http://www.gnu.org/manual/autoconf-2.53/html_node/AC_LIBOBJ-vs.-LIBOBJS.html
+# This is necessary so that .o files in LIBOBJS are also built via
+# the ANSI2KNR-filtering rules.
+LIB@&t@OBJS=`echo "$LIB@&t@OBJS" | sed 's,\.[[^.]]* ,$U&,g;s,\.[[^.]]*$,$U&,'`
+LTLIBOBJS=`echo "$LIB@&t@OBJS" | sed 's,\.[[^.]]* ,.lo ,g;s,\.[[^.]]*$,.lo,'`
+AC_SUBST(LTLIBOBJS)
+
+AM_ICONV()
+if test "$am_cv_func_iconv" '!=' yes; then
+	AC_MSG_ERROR([iconv not found, try using --with-libiconv-prefix])
+fi
+AC_CHECK_HEADERS(iconv.h,,[
+		AC_MSG_WARN([iconv.h not found (INCICONV=$INCICONV)])
+		])
+
+dnl #
+dnl # Now we must check for Python/Pyrex
+dnl #
+dnl # (need python, python headers, and pyrex)
+
+AC_ARG_ENABLE(python-bindings, AS_HELP_STRING([--disable-python-bindings], [do not build python bindings]),[enable_python=$enableval], [enable_python=auto])
+
+if test x$enable_python = xno; then
+    have_python=no
+else
+    AC_MSG_NOTICE([Checking to see if we can build Python bindings])
+    have_python=no
+    if test x$enable_python != xyes -a x$enable_python != xauto; then
+        minimum_version=$enable_python
+	enable_python=yes
+    else
+        minimum_version=2.3
+    fi
+	AM_PATH_PYTHON($minimum_version, [have_python_path=yes], [have_python_path=no] )
+	AC_CHECK_PROGS(PYREX, pyrexc)
+	AM_CHECK_PYTHON_HEADERS([have_python_header=yes], [have_python_header=no])
+	
+	if test x$have_python_path = xno -o x$have_python_header = xno -o x$PYREX != xpyrexc ; then
+            if test x$enable_python = xyes ; then
+                AC_MSG_ERROR([Building python bindings requested, but can't build them])
+            else
+                AC_MSG_NOTICE([Not building Python bindings])
+            fi
+	else
+	    if test -z "$PYTHON" ; then
+	        AC_MSG_WARN([Python not found])
+	    else
+		have_python=yes
+	    fi
+	
+	    if test x$have_python = xno ; then
+	        if test x$enable_python = xyes ; then
+	            AC_MSG_ERROR([Building python explicitly requested, but can't build python bindings])
+		else
+		    AC_MSG_NOTICE([Not building Python bindings])
+	        fi
+	    else
+
+dnl # require at least pyrex 0.9.6
+
+		AC_MSG_CHECKING([pyrex version])
+
+		pyrex_ver=`$PYREX --version 2>&1 | sed -e 's/Pyrex version //'`
+	 	`echo "$pyrex_ver" | awk 'BEGIN { FS = "."; } { printf "export pyrex_maj_ver=%s export pyrex_min_ver=%s export pyrex_sub_ver=%s", $1, $2, $3;}'`
+
+		if test "$pyrex_min_ver" -lt 9 || test "$pyrex_sub_ver" -lt 6 ; then
+		    AC_MSG_RESULT([$pyrex_ver])
+		    if test x$enable_python = xyes ; then
+			AC_MSG_ERROR([Building python explicitly requested, but can't build python bindings, need at least pyrex 0.9.6])
+		    else
+			AC_MSG_NOTICE([Not building Python bindings, need at least pyrex 0.9.6])
+			have_python=no
+	            fi
+    		else
+		    AC_MSG_RESULT([ok])
+    		fi
+
+	    fi
+	fi
+fi
+AM_CONDITIONAL(HAVE_PYTHON, test x$have_python = xyes)
+
+AC_ARG_ENABLE(minor-tools, AC_HELP_STRING([--disable-minor-tools], [Build without minor rra command line tools]),:,enable_legacy_support=yes)
+AM_CONDITIONAL(ENABLE_MINOR_TOOLS, test x"$enable_minor_tools" != xno)
+if test x"$enable_minor_tools" != xno; then
+       AC_DEFINE(ENABLE_MINOR_TOOLS, 1, [Building with minor rra command line tools])
+fi
+AM_CONDITIONAL(ENABLE_MINOR_TOOLS, test x"$enable_minor_tools" != xno)
+
+AC_OUTPUT([librra.pc
+           Makefile
+           src/Makefile
+           lib/Makefile
+           man/Makefile
+           python/Makefile])

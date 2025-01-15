@@ -1,0 +1,4 @@
+debian/tmp/usr/lib/python*/*-packages
+debian/tmp/usr/bin
+config/org.synce.SyncEngine.service usr/share/dbus-1/services
+config/syncengine.conf.xml usr/share/doc/synce-sync-engine

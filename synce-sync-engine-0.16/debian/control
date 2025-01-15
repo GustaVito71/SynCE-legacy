@@ -1,0 +1,47 @@
+Source: synce-sync-engine
+Section: libs
+Priority: optional
+Maintainer: Mark Ellis <mark@mpellis.org.uk>
+Build-Depends: debhelper (>= 5)
+Build-Depends-Indep: python-setuptools, python (>=2.6.6-3)
+Standards-Version: 3.9.3
+
+Package: synce-sync-engine
+Section: utils
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, synce-dccm, python-gobject, python-dbus, python-dateutil, python-libxml2, python-tz, python-libxslt1, python-rra (>=0.14), python-rapi2 (>=0.14), python-rtfcomp
+Provides: ${python:Provides}
+Description: Synchronization engine for Windows Mobile devices
+ SyncEngine talks the to a Windows Mobile device through the ActiveSync
+ protocol. It provides plugins for OpenSync for synchronization. SyncEngine
+ talks to the device through the connection manager, odccm.
+ .
+ This package contains the actual SyncEngine.
+
+Package: opensync-plugin-synce
+Section: libs
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, synce-sync-engine, python-opensync, python-dbus, python-gobject, opensync-module-python, dbus-x11
+Provides: ${python:Provides}
+Description: SynCE plugin for OpenSync
+ SyncEngine talks the to a Windows Mobile device through the ActiveSync
+ protocol. It provides plugins for OpenSync for synchronization. SyncEngine
+ talks to the device through the connection manager, odccm.
+ .
+ This package contains a SyncEngine plugin for OpenSync. This allows you
+ to sync using SyncEngine.
+
+Package: opensync-plugin-synce-3x
+Section: libs
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, synce-sync-engine, python-opensync1, python-dbus, python-gobject, libopensync-plugin-python (>>0.39), dbus-x11
+Provides: ${python:Provides}
+Description: SynCE plugin for OpenSync
+ SyncEngine talks the to a Windows Mobile device through the ActiveSync
+ protocol. It provides plugins for OpenSync for synchronization. SyncEngine
+ talks to the device through the connection manager, odccm.
+ .
+ This package contains a SyncEngine plugin for OpenSync 0.3x. This allows you
+ to sync using SyncEngine.
+ .
+ This plugin is EXPERIMENTAL.

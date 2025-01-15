@@ -1,0 +1,4 @@
+<AS:ApplicationData xmlns:AS="http://synce.org/formats/airsync_wm5/airsync" xmlns:T="http://synce.org/formats/airsync_wm5/tasks">
+        <T:Subject>Importance</T:Subject>
+        <T:Importance>2</T:Importance>
+</AS:ApplicationData>

@@ -1,0 +1,154 @@
+2013-07-25  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 0.17 release
+
+2012-09-27  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add python functions for files sent over RRA
+
+2012-09-26  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add functions and tools for dealing with files sent
+	  over RRA
+
+2012-05-29  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 0.16 release
+
+2012-05-27  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add -lmimedir to libs in pkgconfig file
+
+2011-11-16  Mark Ellis  <mark@mpellis.org.uk>
+
+	* update build system; drop references to librapi2 to use
+	  synce-core
+
+2009-07-16  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 0.14 release
+
+2009-07-13  Mark Ellis  <mark@mpellis.org.uk>
+
+	* require pyrex >= 0.9.6
+
+2009-04-14  Mark Ellis  <mark@mpellis.org.uk>
+
+	* matchmaker - break code into more useful functions, make usage
+	  of command line tool clearer
+	* lib/syncmgr.{c,h} - protect internal type data
+	* python/pyrra.pyx - add pydocs, export constants, throw exceptions
+	  on errors
+	* check returns of various file read/writes
+	* pass timezone info to recurrence routines
+	* calculate actual start date for recurrence pattern
+
+2009-04-11  Mark Ellis  <mark@mpellis.org.uk>
+
+	* lib/matchmaker.c - remove unused code, access SynceInfo through
+	  existing rapi connection
+	* get local IP for SyncMgr from default connection if no explicit
+	  connection given
+	* add debug option to synce-matchmaker, rra-subscribe and rra-delete
+	* fix complier warnings in pyrra
+
+2009-04-10  Mark Ellis  <mark@mpellis.org.uk>
+
+	* use synce_info_get_ functions to access SynceInfo
+	* get device ip for syncmgr from rapi connection
+
+2009-04-06  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add utf8 option to all conversion tools; add optional timezone
+	  file to rra-appointment-from-vevent and rra-task-to-vtodo; add
+	  debug level option to get-{types,ids,data} tools
+
+2009-04-03  Mark Ellis  <mark@mpellis.org.uk>
+
+	* specify an IP for SyncMgr to connect to, rather than all
+	  interfaces
+	* pyrra.pyx - rename __new__to __cinit__
+
+2009-03-19  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add debug level option to conversion tools
+
+2009-03-17  Mark Ellis  <mark@mpellis.org.uk>
+
+	* add codepage parameter to all exported conversion functions,
+	  should be the iconv name of the Windows codepage, currently
+	  only used in Notes/Description field
+	* add VCALENDAR container to VEVENT and VTODO containers
+	* fix some compiler warnings
+	* add codepage option to all conversion test programs, fix
+	  parameter handling and update man pages
+
+2009-03-11  Mark Ellis  <mark@mpellis.org.uk>
+
+	* replace duplicate man pages with links
+
+2009-03-04  Mark Ellis  <mark@mpellis.org.uk>
+
+	* python/Makefile.am - removed explicit link against libpython,
+	  not required in an extension
+
+2009-01-10  Mark Ellis  <mark@mpellis.org.uk>
+
+	* 0.13 release
+
+2009-01-08  Mark Ellis  <mark@mpellis.org.uk>
+
+	* some improvements to wstr conversion handling
+
+2008-12-18  Mark Ellis  <mark@mpellis.org.uk>
+
+	* configure.ac.in - require at least python 2.3, pyrex doesn't
+	  support 2.2; check pyrex version when python > 2.4
+
+2008-05-23  Jonny Lamb  <jonnylamb@jonnylamb.com>
+
+	* python/pyrra.pyx: Converted x < i < y for loops to the new-style
+	syntax and fixed a build-error of using the word "type" as a variable
+	name -- this is a reserved Python keyword. (See Debian #482258)
+
+2008-04-13  Jonny Lamb  <jonnylamb@jonnylamb.com>
+
+	* man/rra-appointment-from-vevent.1:
+	* man/rra-appointment-to-vevent.1:
+	* man/rra-contact-from-vcard.1:
+	* man/rra-contact-to-vcard.1:
+	* man/rra-decode.1:
+	* man/rra-delete.1:
+	* man/rra-get-data.1:
+	* man/rra-get-ids.1:
+	* man/rra-get-recurring-appointments.1:
+	* man/rra-get-types.1:
+	* man/rra-put-data.1:
+	* man/rra-subscribe.1:
+	* man/rra-task-from-vtodo.1:
+	* man/rra-task-to-vtodo.1:
+	* man/rra-timezone.1: Escaped minus signs so they're not hyphens.
+	Notified by lintian: hyphen-used-as-minus-sign.
+
+2008-04-13  Jonny Lamb  <jonnylamb@jonnylamb.com>
+
+	* Removed spec file.
+
+2008-03-26  Mark Ellis  <mark@mpellis.org.uk>
+
+	* correct build without python bindings (bug 1708885)
+
+2008-01-09  Mark Ellis  <mark@mpellis.org.uk>
+
+	* added LICENSE to EXTRA_DIST
+
+2007-11-29  Mark Ellis <mark_ellis@users.sourceforge.net>
+
+	* from Debian package, man pages for minor utils, and 
+	  install them (disable in configure)
+
+2007-11-28  Mark Ellis <mark_ellis@users.sourceforge.net>
+
+	* started Changelog
+	* added synce and rapi flags to python Makefile.am
+

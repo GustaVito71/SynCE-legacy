@@ -1,0 +1,11 @@
+diff -Nurp synce-core-0.18~20131217.orig/python/pyrapi2.pyx synce-core-0.18~20131217/python/pyrapi2.pyx
+--- synce-core-0.18~20131217.orig/python/pyrapi2.pyx	2012-12-31 14:50:38.000000000 +0000
++++ synce-core-0.18~20131217/python/pyrapi2.pyx	2014-01-24 10:46:20.238888850 +0000
+@@ -1348,6 +1348,7 @@ cdef class RAPISession:
+ 
+         cdef LPCE_FIND_DATA find_data
+         cdef DWORD numberOfFiles
++        find_data = NULL
+ 
+         cdef CE_FIND_DATA found_file
+ 

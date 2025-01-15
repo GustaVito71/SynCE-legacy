@@ -1,0 +1,55 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          synce-bluetooth
+# Required-Start:    bluetooth $remote_fs
+# Required-Stop:     bluetooth $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop synce bluetooth
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+DUND=`which dund` || exit 0
+SDPTOOL=`which sdptool` || exit 0
+
+DUND_OPTS="--listen --activesync --msdun call synce-bt-peer"
+
+. /lib/lsb/init-functions
+
+case "$1" in
+    start)
+	log_daemon_msg "Starting bluetooth SynCE service..." "dund"
+
+	$SDPTOOL add activesync
+	$SDPTOOL add dun
+	$SDPTOOL add sp
+
+	start-stop-daemon --start --oknodo --quiet --exec $DUND -- $DUND_OPTS
+
+	log_end_msg $?
+	;;
+
+    stop)
+	log_daemon_msg "Stopping bluetooth SynCE service..." "dund"
+	start-stop-daemon --stop --oknodo --quiet --exec $DUND
+
+	log_end_msg $?
+	;;
+
+    reload|restart|force-reload)
+	$0 stop && sleep 2 && $0 start
+	;;
+
+    status)
+	status_of_proc $DUND dund && exit 0 || exit $?
+	;;
+
+    *)
+	log_action_msg "Usage: /etc/init.d/synce-connector-bluetooth {start|stop|reload|restart|force-reload|status}"
+	exit 1
+    ;;
+esac
+
+exit 0

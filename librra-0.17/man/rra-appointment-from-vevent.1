@@ -1,0 +1,50 @@
+.\" $Id$
+.TH "synce-partnership" "1" "September 2003" "The SynCE project" "http://synce.sourceforge.net/"
+.SH NAME
+rra-appointment-from-vevent, rra-appointment-to-vevent, rra-contact-from-vcard, rra-contact-to-vcard, rra-decode, rra-delete, rra-get-data, rra-get-ids, rra-get-recurring-appointments, rra-get-types, rra-put-data, rra-subscribe, rra-task-from-vtodo, rra-task-to-vtodo, rra-timezone \- Tools for manipulating the WinCE RRA database and data
+
+.SH SYNOPSIS
+\fBrra-appointment-from-vevent\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] [-t \fITZFILE\fR] \fIVEVENT_FILE\fR \fIAPPOINTMENT_FILE\fR
+ 
+\fBrra-appointment-to-vevent\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] [-t \fITZFILE\fR] \fIAPPOINTMENT_FILE\fR [\fIVEVENT_FILE\fR]
+
+\fBrra-contact-from-vcard\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] \fIVCARD_FILE\fR \fICONTACT_FILE\fR
+
+\fBrra-contact-to-vcard\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] \fICONTACT_FILE\fR [\fIVCARD_FILE\fR]
+
+\fBrra-decode\fR \fIFILE\fR
+
+\fBrra-delete\fR [-d \fILEVEL\fR] \fITYPE-ID\fR \fIOBJECT-ID\fR ...
+
+\fBrra-get-data\fR [-d \fILEVEL\fR] \fITYPE-ID\fR \fIOBJECT-ID\fR \fIFILENAME\fR
+
+\fBrra-get-ids\fR [-d \fILEVEL\fR] \fITYPE-ID\fR ...
+
+\fBrra-get-recurring-appointments\fR
+
+\fBrra-get-types\fR [-d \fILEVEL\fR]
+
+\fBrra-put-data\fR \fITYPE-ID\fR \fIOBJECT-ID\fR \fIFLAGS\fR \fIFILENAME\fR
+
+\fBrra-subscribe\fR [-d \fILEVEL\fR] [\fITYPE-ID\fR] [\fITYPE-ID\fR] ...
+
+\fBrra-task-from-vtodo\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] [-t \fITZFILE\fR] \fIVTODO_FILE\fR \fITASK_FILE\fR
+
+\fBrra-task-to-vtodo\fR [-d \fILEVEL\fR] [-c \fICODEPAGE\fR] [-u] [-t \fITZFILE\fR] \fITASK_FILE\fR [\fIVTODO_FILE\fR]
+
+\fBrra-timezone\fR [\-d \fILEVEL\fR] [\-h] [\-i \fIINPUT-FILE\fR]
+[\-o \fIOUTPUT-FILE\fR] [\-b] [\-r] [\-v]
+
+\fBrra-file-unpack\fR [-d \fILEVEL\fR] \fIINPUT_FILE\fR [\fIOUTPUT_FILE\fR]
+
+\fBrra-file-pack\fR [-d \fILEVEL\fR] [-p \fIPATHNAME\fR] \fIINPUT_FILE\fR \fIOUTPUT_FILE\fR
+
+.SH "DESCRIPTION"
+.PP
+Tools to manipulate the RRA components of a WinCE device, and convert the data items retrieved and sent via RRA.
+
+.SH "AUTHOR"
+.PP
+This manual page was written by Jonathan McDowell <noodles@earth.li>
+.SH "SEE ALSO"
+synce(1)
