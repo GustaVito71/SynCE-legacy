@@ -4,12 +4,12 @@
 [submodule "synce-core"]
 	path = synce-core
 	url = https://github.com/GustaVito71/synce-core.git
-[submodule "synce-engine"]
-	path = synce-engine
-	url = https://github.com/GustaVito71/synce-engine.git
 [submodule "librra"]
 	path = librra
 	url = https://github.com/GustaVito71/librra.git
 [submodule "libmimedir"]
 	path = libmimedir
 	url = https://github.com/GustaVito71/libmimedir.git
+[submodule "synce-sync-engine"]
+	path = synce-sync-engine
+	url = https://github.com/GustaVito71/synce-sync-engine.git
