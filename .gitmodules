@@ -7,3 +7,9 @@
 [submodule "synce-engine"]
 	path = synce-engine
 	url = https://github.com/GustaVito71/synce-engine.git
+[submodule "librra"]
+	path = librra
+	url = https://github.com/GustaVito71/librra.git
+[submodule "libmimedir"]
+	path = libmimedir
+	url = https://github.com/GustaVito71/libmimedir.git
