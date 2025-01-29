@@ -1,0 +1,9 @@
+[submodule "librtfcomp"]
+	path = librtfcomp
+	url = https://github.com/GustaVito71/librtfcomp.git
+[submodule "synce-core"]
+	path = synce-core
+	url = https://github.com/GustaVito71/synce-core.git
+[submodule "synce-engine"]
+	path = synce-engine
+	url = https://github.com/GustaVito71/synce-engine.git
