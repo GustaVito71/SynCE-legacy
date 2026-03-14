@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.synce.SyncEngine
-Exec=/usr/bin/sync-engine --detached --logfile=~/.synce/sync-engine.log --once
