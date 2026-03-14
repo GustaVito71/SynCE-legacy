@@ -187,8 +187,9 @@ sudo dpkg -i synce-sync-engine_0.16-0~bookworm2_all.deb
 ### 4. Verificar la instalación
 
 ```bash
-python3 -c "import pyrapi2; print('pyrapi2 OK')"
-python3 -c "import pyrra;   print('pyrra OK')"
+python3 -c "import pyrtfcomp; print('pyrtfcomp OK')"
+python3 -c "import pyrapi2;  print('pyrapi2 OK')"
+python3 -c "import pyrra;    print('pyrra OK')"
 systemctl status synce-dccm
 ls /lib/udev/rules.d/85-synce.rules
 ```
