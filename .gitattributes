@@ -1,0 +1,9 @@
+# Normalizar line endings a LF en el repositorio
+* text=auto eol=lf
+
+# Binarios — no tocar
+*.deb binary
+*.gz binary
+*.xz binary
+*.png binary
+*.ppk binary
