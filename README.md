@@ -190,7 +190,7 @@ sudo dpkg -i synce-sync-engine_0.16-0~bookworm2_all.deb
 python3 -c "import pyrtfcomp; print('pyrtfcomp OK')"
 python3 -c "import pyrapi2;  print('pyrapi2 OK')"
 python3 -c "import pyrra;    print('pyrra OK')"
-systemctl status synce-dccm
+ls /usr/share/dbus-1/system-services/org.synce.dccm.service
 ls /lib/udev/rules.d/85-synce.rules
 ```
 
