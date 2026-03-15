@@ -67,6 +67,9 @@ git submodule foreach git checkout bookworm
 
 ### 3. Construir e instalar cada paquete
 
+> **Advertencia:** Si un build falla, el directorio queda en estado sucio. No reintente
+> el build en el mismo directorio — regrese al paso 2 y reclone el repositorio desde cero.
+
 ---
 
 #### 3.1 librtfcomp
@@ -75,7 +78,6 @@ git submodule foreach git checkout bookworm
 sudo apt-get install -y python3-all-dev dh-python python3 cython3
 
 cd librtfcomp
-rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -92,7 +94,6 @@ sudo dpkg -i librtfcomp0_1.3-0~bookworm1_amd64.deb \
 sudo apt-get install -y dh-autoreconf bison flex libtool libtool-bin
 
 cd libmimedir
-rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -110,7 +111,6 @@ sudo apt-get install -y \
     isc-dhcp-client libgudev-1.0-dev udev cython3 python3-dev
 
 cd synce-core
-rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -129,7 +129,6 @@ sudo dpkg -i libsynce0_0.17-0~bookworm8_amd64.deb \
 sudo apt-get install -y libglib2.0-dev cython3 python3-dev
 
 cd librra
-rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -149,7 +148,6 @@ sudo apt-get install -y \
     python3-lxml python3-dbus
 
 cd synce-sync-engine
-rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
