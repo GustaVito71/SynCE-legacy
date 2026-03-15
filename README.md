@@ -86,10 +86,7 @@ git submodule foreach git checkout bookworm
 sudo apt-get install -y python3-all-dev dh-python python3 cython3
 
 cd librtfcomp
-if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
-    mkdir -p .pc && echo 3 > .pc/.version
-    cp debian/patches/series .pc/applied-patches
-fi
+rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -106,10 +103,7 @@ sudo dpkg -i librtfcomp0_1.3-0~bookworm1_amd64.deb \
 sudo apt-get install -y dh-autoreconf bison flex libtool libtool-bin
 
 cd libmimedir
-if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
-    mkdir -p .pc && echo 3 > .pc/.version
-    cp debian/patches/series .pc/applied-patches
-fi
+rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -127,10 +121,7 @@ sudo apt-get install -y \
     isc-dhcp-client libgudev-1.0-dev udev cython3 python3-dev
 
 cd synce-core
-if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
-    mkdir -p .pc && echo 3 > .pc/.version
-    cp debian/patches/series .pc/applied-patches
-fi
+rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -149,10 +140,7 @@ sudo dpkg -i libsynce0_0.17-0~bookworm8_amd64.deb \
 sudo apt-get install -y libglib2.0-dev cython3 python3-dev
 
 cd librra
-if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
-    mkdir -p .pc && echo 3 > .pc/.version
-    cp debian/patches/series .pc/applied-patches
-fi
+rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
@@ -172,10 +160,7 @@ sudo apt-get install -y \
     python3-lxml python3-dbus
 
 cd synce-sync-engine
-if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
-    mkdir -p .pc && echo 3 > .pc/.version
-    cp debian/patches/series .pc/applied-patches
-fi
+rm -rf .pc/
 dpkg-buildpackage -b -uc -us
 cd ..
 
