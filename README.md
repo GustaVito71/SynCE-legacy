@@ -183,6 +183,6 @@ synce-pstatus              # muestra versión WinCE, batería, memoria
 | Síntoma | Causa probable | Solución |
 |---------|----------------|----------|
 | `dpkg -i` falla con dependencias | Paquetes instalados fuera de orden | Respetar el orden de la sección 3 |
-| `quilt push` falla al compilar | Patches ya aplicados sin estado `.pc/` | Ejecutar el bloque de inicialización quilt |
+| Build falla o directorio sucio | Estado inconsistente tras build anterior | Reclonear desde cero (ver paso 2) |
 | `EADDRINUSE` al reconectar | Socket stale de dccm | Corregido en bookworm8 — reinstalar |
 | `import pyrapi2` falla | `python3-rapi2` no instalado | `sudo dpkg -i python3-rapi2_*.deb` |
