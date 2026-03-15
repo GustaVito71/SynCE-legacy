@@ -187,12 +187,22 @@ sudo dpkg -i synce-sync-engine_0.16-0~bookworm2_all.deb
 ### 4. Verificar la instalación
 
 ```bash
+# Bindings Python
 python3 -c "import pyrtfcomp; print('pyrtfcomp OK')"
 python3 -c "import pyrapi2;  print('pyrapi2 OK')"
 python3 -c "import pyrra;    print('pyrra OK')"
+
+# Archivos de sistema
 ls /usr/share/dbus-1/system-services/org.synce.dccm.service
 ls /lib/udev/rules.d/85-synce.rules
+
+# Conectar el dispositivo y verificar
+ss -tnp | grep 5679        # debe mostrar ESTAB con la IP del dispositivo
+synce-pstatus              # muestra versión WinCE, batería, memoria
 ```
+
+> **Nota:** `synce-dccm` usa activación D-Bus, no systemd. No existe `synce-dccm.service` en systemd.
+> El mensaje `dbus.proxies ERROR: Introspect error` en el journal es no fatal — el stack funciona correctamente.
 
 ---
 
