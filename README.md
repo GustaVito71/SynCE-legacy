@@ -67,17 +67,6 @@ git submodule foreach git checkout bookworm
 
 ### 3. Construir e instalar cada paquete
 
-> **Nota sobre quilt:** La rama `bookworm` tiene los patches pre-aplicados al
-> árbol fuente. Antes de compilar cada paquete es necesario inicializar el
-> estado interno de quilt. Ejecutar dentro del directorio de cada paquete:
->
-> ```bash
-> if [ -f debian/patches/series ] && [ -s debian/patches/series ] && [ ! -d .pc ]; then
->     mkdir -p .pc && echo 3 > .pc/.version
->     cp debian/patches/series .pc/applied-patches
-> fi
-> ```
-
 ---
 
 #### 3.1 librtfcomp
